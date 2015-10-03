@@ -1,0 +1,20 @@
+/*
+ * A simple State Machine example.
+ */
+input signal x
+input signal y
+output signal z
+
+state State1
+  set z = false
+  if x == true goto State2
+
+  state State3
+    set x = false
+    if x == false goto State2
+  end
+end
+
+state State2
+  if x == false and y == true goto State1
+end
