@@ -1,4 +1,3 @@
 setlocal omnifunc=statemachine#Complete
-
 setlocal equalprg='./formatter.sh'
-setlocal formatprg="./formatter.sh"
+setlocal formatprg='./formatter.sh'
