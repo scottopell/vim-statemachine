@@ -1,13 +1,14 @@
-echom 'hello compiler'
 if exists('current_compiler')
-    finish
+  finish
 endif
 
-echom 'hello statemachine'
+" Essentially a polyfill for old versions of vim
+if exists(":CompilerSet") != 2
+  command -nargs=* CompilerSet setlocal <args>
+endif
 
-let s:validator_loc = escape(findfile('validator.sh', '.;'), ' \')
-let current_compiler = s:validator_loc
 
-CompilerSet makeprg=s:validator_loc\ %
-execute 'CompilerSet errorformat='.escape(statemachine#errorformat(), ' ')
-echom 'hello world2'
+let current_compiler = statemachine#GetExePath()
+
+execute 'CompilerSet makeprg=' . statemachine#GetExePath() . '\ %'
+execute 'CompilerSet errorformat='.escape(statemachine#Errorformat(), ' ')

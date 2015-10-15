@@ -5,10 +5,12 @@ input signal x
 input signal y
 output signal z
 
+wat
+
+
 state State1
 set z = false
 if x == true goto State2
-
 end
 
 state State2
