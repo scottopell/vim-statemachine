@@ -4,9 +4,7 @@
 input signal x
 input signal y
 output signal z
-
-wat
-
+state State2
 
 state State1
 set z = false

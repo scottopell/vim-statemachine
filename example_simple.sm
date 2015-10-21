@@ -1,0 +1,5 @@
+input signal x
+
+state State2
+if x == false goto State1
+end

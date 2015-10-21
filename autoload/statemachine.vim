@@ -15,7 +15,7 @@ function! statemachine#Complete(findstart, base)
     endif
     let l:results = []
     let l:completions =
-                \ system('./complete.sh % '.shellescape(a:base))
+                \ system('./complete.rb '.expand('%:p').' '.getline('.').' '.col('.'))
     let l:cmd = substitute(a:base, '\v\S+$', '', '')
     for l:line in split(l:completions, '\n')
       let l:tokens = split(l:line, '\t')

@@ -9,8 +9,6 @@ set cpo&vim
 
 function! SyntaxCheckers_statemachine_statemachine_GetLocList() dict
   let l:makeprg = self.makeprgBuild({'exe': statemachine#GetExePath() })
-  echom 'huh'
-  echom statemachine#Errorformat()
   return SyntasticMake({'makeprg': l:makeprg,
                        \ 'errorformat': statemachine#Errorformat() })
 endfunction
