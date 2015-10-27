@@ -24,3 +24,53 @@ Plug '~/code/vim-statemachine'
 Plug 'scottopell/vim-statemachine'
 ```
 
+## XText Wrappers
+![example_usages.png]
+
+### Validator.rb
+
+*Usage:*
+```shell
+$ ./validator.rb example.sm
+```
+
+This will return errors to you in the following format
+
+```
+<line>: <description>
+<line>: <description>
+<line>: <description>
+```
+
+An example errorformat would be `'%l: %m'` where `%l` is line # and `%m` is
+the error message.
+
+### complete.rb
+
+*Usage:*
+```shell
+# File offset
+$ ./complete.rb example.sm 5
+# OR
+# line and column
+$ ./complete.rb example.sm 2 6
+```
+
+This will return a list of possible code completions from this point.
+You can pass it either an offset into the file as a character count or a
+row and column pair.
+
+```
+<token>
+<othertoken>
+<thirdtoken>
+```
+
+### formatter.sh
+
+*Usage:*
+```shell
+$ cat example.sm | ./formatter.sh
+```
+
+This will format the code for you and print out the formatted code.
