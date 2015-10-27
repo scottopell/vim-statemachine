@@ -25,7 +25,7 @@ Plug 'scottopell/vim-statemachine'
 ```
 
 ## XText Wrappers
-![example_usages.png]
+![usages](example_usages.png)
 
 ### Validator.rb
 
