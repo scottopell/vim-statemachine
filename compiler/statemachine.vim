@@ -8,7 +8,7 @@ if exists(":CompilerSet") != 2
 endif
 
 
-let current_compiler = statemachine#GetExePath()
+let current_compiler = statemachine#GetValidatorExePath()
 
-execute 'CompilerSet makeprg=' . statemachine#GetExePath() . '\ %'
+execute 'CompilerSet makeprg=' . statemachine#GetValidatorExePath() . '\ %'
 execute 'CompilerSet errorformat='.escape(statemachine#Errorformat(), ' ')

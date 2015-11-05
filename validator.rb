@@ -9,6 +9,8 @@ json_output = `curl -s -G "http://localhost:8080/xtext-service/validate?resource
 json = JSON.parse(json_output)
 s = StringIO.new
 json['issues'].each do |issue|
+  s<< ARGF.argv[0]
+  s << ': '
   s << issue['line']
   s << ': '
   s << issue['description']

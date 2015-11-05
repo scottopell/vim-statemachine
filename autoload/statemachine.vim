@@ -1,9 +1,13 @@
 function! statemachine#Errorformat()
-  return '%l: %m'
+  return '%f: %l: %m'
 endfunction
 
-function! statemachine#GetExePath()
+function! statemachine#GetValidatorExePath()
   return escape('./' . findfile('validator.rb', '.;'), ' \')
+endfunction
+
+function! statemachine#GetCompleterExePath()
+  return escape('./' . findfile('complete.rb', '.;'), ' \')
 endfunction
 
 function! statemachine#Complete(findstart, base)
@@ -14,8 +18,19 @@ function! statemachine#Complete(findstart, base)
       return []
     endif
     let l:results = []
+
+    let l:file_contents_list = getbufline('', 'w0', 'w$')
+    " TODO, this seems to be leaving out the current line (or more accurately,
+    " its there, but its empty (because I can see an extra \n))
+    let l:file_contents = ''
+    " TODO, this shouldn't always be \n probably (should be current line
+    " ending)
+    for l:line in l:file_contents_list
+      let l:file_contents .= l:line . '\n'
+    endfor
+
     let l:completions =
-                \ system('./complete.rb '.expand('%:p').' '.getline('.').' '.col('.'))
+                \ system(statemachine#GetCompleterExePath().' '.(eval(line2byte(line('.')) + col('.'))), l:file_contents)
     let l:cmd = substitute(a:base, '\v\S+$', '', '')
     for l:line in split(l:completions, '\n')
       let l:tokens = split(l:line, '\t')

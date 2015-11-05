@@ -8,12 +8,14 @@ set cpo&vim
 
 
 function! SyntaxCheckers_statemachine_statemachine_GetLocList() dict
-  let l:makeprg = self.makeprgBuild({'exe': statemachine#GetExePath() })
+  " TODO switch the 'exe' here to 'exec'
+  let l:makeprg = self.makeprgBuild({'exe': statemachine#GetValidatorExePath() })
   return SyntasticMake({'makeprg': l:makeprg,
                        \ 'errorformat': statemachine#Errorformat() })
 endfunction
 
 function! SyntaxCheckers_statemachine_statemachine_IsAvailable() dict
+  " TODO make this actually check whether or not its available
   return 1
 endfunction
 
