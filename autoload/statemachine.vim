@@ -10,8 +10,13 @@ function! statemachine#GetCompleterExePath()
   return escape('./' . findfile('complete.rb', '.;'), ' \')
 endfunction
 
+function! statemachine#GetCurrBuffContents()
+  return join(getbufline(bufname('%'), 1, "$"), "\n")
+endfunction
+
 function! statemachine#Complete(findstart, base)
   if a:findstart
+    echom getline('.')
     return getline('.') =~# '\v^\s*$' ? -1 : 0
   else
     if empty(a:base)
@@ -19,15 +24,16 @@ function! statemachine#Complete(findstart, base)
     endif
     let l:results = []
 
-    let l:file_contents_list = getbufline('', 'w0', 'w$')
     " TODO, this seems to be leaving out the current line (or more accurately,
     " its there, but its empty (because I can see an extra \n))
-    let l:file_contents = ''
     " TODO, this shouldn't always be \n probably (should be current line
     " ending)
-    for l:line in l:file_contents_list
-      let l:file_contents .= l:line . '\n'
-    endfor
+    echom bufname('%')
+    echom getline('.')
+    let l:file_contents = statemachine#GetCurrBuffContents()
+
+    echom 'file contents here'
+    echom l:file_contents
 
     let l:completions =
                 \ system(statemachine#GetCompleterExePath().' '.(eval(line2byte(line('.')) + col('.'))), l:file_contents)
