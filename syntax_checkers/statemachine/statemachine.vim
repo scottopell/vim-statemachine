@@ -23,5 +23,11 @@ endfunction
 call g:SyntasticRegistry.CreateAndRegisterChecker({'filetype': 'statemachine',
                                                   \'name': 'statemachine'})
 
+if exists('g:syntastic_extra_filetypes')
+  call add(g:syntastic_extra_filetypes, 'statemachine')
+else
+  let g:syntastic_extra_filetypes = ['statemachine']
+endif
+
 let &cpo = s:save_cpo
 unlet s:save_cpo
